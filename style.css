@@ -1,0 +1,21 @@
+body {
+
+    background: radial-gradient(green, black);
+  
+    font-family: monospace;
+  
+    text-align: center;
+  
+    font-size: 1.5rem;
+  
+    position: relative;
+  
+  }
+  
+  
+  
+  h2 {
+    color: lime;
+    font-family: cursive;
+    text-align: center;
+  }

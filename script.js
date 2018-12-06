@@ -5,12 +5,14 @@ window.onload=function() {
     setInterval(game,1000/15);
 
 }
-px=py=10;
-gs=tc=20;
-ax=ay=15;
-xv=yv=0;
-trail=[];
-tail = 1;
+let px=py=10;
+let gs=tc=20;
+let ax=ay=15;
+let xv=yv=0;
+let trail=[];
+let tail = 1;
+let highScore = 0; // Ty's work
+
 
 
 function game() {
@@ -58,19 +60,14 @@ function game() {
 
     score = trail.length-1; //Ty's work
     document.getElementById("score").innerHTML = score; //Ty's work
-    //console.log(score);
-    let highScore = 0;
-    console.log(highScore);
     
     if(score > parseInt(highScore)){  //Ty's work
        localStorage.setItem('storedHighScore', score);
     } else {
        localStorage.setItem('storedHighScore', highScore);
     }
-    localStorage.setItem('storedHighScore', highScore);
+
     highScore = localStorage.getItem("storedHighScore");
-    console.log(highScore);
-    
     
     document.getElementById("hiScore").innerHTML = highScore; //Ty's work
 }

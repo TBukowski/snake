@@ -14,7 +14,6 @@ let tail = 1;
 let highScore = 0; // Ty's work
 
 
-
 function game() {
     px+=xv;
     py+=yv;
@@ -57,6 +56,14 @@ function game() {
     
     ctx.fill();
     ctx.strokeStyle = 'red';
+
+
+
+    // DYNAMIC BACKGROUND BASED ON SNAKE POSITION (px/py)
+    let heading = document.querySelector('.heading'); // coordinates in header
+    // adjust possible ranges to get prefered colors
+    document.body.style.backgroundColor = 'rgb(' + (px*10+35) + ',' + (py*11+50) + ',' + (px*py) +')';
+    heading.textContent = `X: ${px}, Y: ${py}`;
 
     score = trail.length-1; //Ty's work
     document.getElementById("score").innerHTML = score; //Ty's work

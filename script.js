@@ -2,15 +2,16 @@ window.onload=function() {
     canv=document.getElementById("gc");
     ctx=canv.getContext("2d");
     document.addEventListener("keydown",keyPush);
-    setInterval(game,1000/15);
+    setInterval(game,1000/9);
 
 }
-let px=py=10;
-let gs=tc=20;
-let ax=ay=15;
-let xv=yv=0;
-let trail=[];
-let tail = 1;
+
+let px=py=10; // initial snake position
+let gs=tc=20; // game board (grid size/tile count)
+let ax=ay=10; // intial apple position
+let xv=yv=0; // velocity of apple, 0 = static
+let trail=[]; // empty array for the snake body to grow in
+let tail = 1; // gives the snake 1 square starting out
 let highScore = 0; // Ty's work
 
 
@@ -50,10 +51,16 @@ function game() {
         ay=Math.floor(Math.random()*tc);
     }
     ctx.fillStyle = 'red';
-    //ctx.fillRect(ax*gs,ay*gs,gs-2,gs-2); 
+    // ctx.fillRect(ax*gs,ay*gs,gs-2,gs-2); 
+
+    // changes "apple" from square to circle
     ctx.beginPath(); //Ty's work
-    ctx.arc(ax*gs, ay*gs, 7, 0, 2* Math.PI); //Ty's work
-    
+    // ctx.arc(ax*gs, ay*gs, 7, 0, 2* Math.PI); //Ty's work
+    ctx.arc(ax*gs+10, ay*gs+9, 9, 0, 2* Math.PI); //Ty's work - makes the apple more aligned with the path of the snake
+
+    //TRY TO ADD APPLE IMAGE - MAYBE COMPONENT?
+
+
     ctx.fill();
     ctx.strokeStyle = 'red';
 
@@ -61,13 +68,16 @@ function game() {
 
     // DYNAMIC BACKGROUND BASED ON SNAKE POSITION (px/py)
     let heading = document.querySelector('.heading'); // coordinates in header
-    // adjust possible ranges to get prefered colors
-    document.body.style.backgroundColor = 'rgb(' + (px*10+35) + ',' + (py*11+50) + ',' + (px*py) +')';
     heading.textContent = `X: ${px}, Y: ${py}`;
 
+    // adjust possible ranges to get prefered colors
+    document.body.style.backgroundColor = `rgb(${px+20},${px*py+50},${py+20})`;
+
+    // sets a score
     score = trail.length-1; //Ty's work
     document.getElementById("score").innerHTML = score; //Ty's work
     
+    // keeps a high score for the session
     if(score > parseInt(highScore)){  //Ty's work
        localStorage.setItem('storedHighScore', score);
     } else {
@@ -78,6 +88,7 @@ function game() {
     
     document.getElementById("hiScore").innerHTML = highScore; //Ty's work
 }
+
 function keyPush(evt) {
     switch(evt.keyCode) {
         case 37:
